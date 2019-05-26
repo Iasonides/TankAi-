@@ -13,16 +13,17 @@ public class TankInfo : MonoBehaviour
     public float launchForce;
     public float fireBetweenTime = 1f;
     public GameObject seeSomething;
-    public NavMeshAgent navMeshAgent;
+    public NavMeshAgent agent;
     public float currentHealth;
     private bool isDead = false;
     Animator anim;
+    public float metersToShoot;
 
     // Start is called before the first frame update
     void Start()
     {
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = speed;
+        agent = this.GetComponent<NavMeshAgent>();
+        agent.speed = speed;
         currentHealth = totalHealth;
     }
 

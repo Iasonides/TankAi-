@@ -9,7 +9,7 @@ public class ConstantinosPatrol : StateMachineBehaviour
     GameObject tank;
     Animator anim;
     GameObject[] waypointList;
-    NavMeshAgent navMeshAgent;
+    NavMeshAgent agent;
     TankInfo tankInfo;
 
     private int count = 0;
@@ -26,7 +26,7 @@ public class ConstantinosPatrol : StateMachineBehaviour
         tankInfo = animator.gameObject.GetComponent<TankInfo>();
         tank = animator.gameObject;
         anim = animator;
-        navMeshAgent = tank.GetComponent<NavMeshAgent>();
+        agent = tank.GetComponent<NavMeshAgent>();
         shootableLayer = LayerMask.GetMask("Shootable");
        
 
@@ -35,8 +35,8 @@ public class ConstantinosPatrol : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        navMeshAgent.destination = waypointList[count].transform.position;
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        agent.destination = waypointList[count].transform.position;
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             count = (count + 1) % waypointList.Length;
 
@@ -52,7 +52,7 @@ public class ConstantinosPatrol : StateMachineBehaviour
         {
             Debug.DrawRay(tankInfo.fireTransform.position, tankInfo.fireTransform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
-            anim.SetBool("chase", true);
+            anim.SetBool("Chase", true);
         }
     }
 

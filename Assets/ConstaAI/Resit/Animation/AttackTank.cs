@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ChaseTank : StateMachineBehaviour
+public class AttackTank : StateMachineBehaviour
 {
     GameObject tank;
     Animator anim;
@@ -11,35 +11,27 @@ public class ChaseTank : StateMachineBehaviour
     GameObject chaseTank;
     NavMeshAgent agent;
     TankInfo tankInfo;
+
+    int shootableLayer;
+    float TillFire;
+    float afterFire;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent = tank.GetComponent<NavMeshAgent>();
+        waypointList = GameObject.FindGameObjectsWithTag("waypoint");
         tankInfo = animator.gameObject.GetComponent<TankInfo>();
         tank = animator.gameObject;
         anim = animator;
-        chaseTank = tankInfo.seeSomething;
+        agent = tank.GetComponent<NavMeshAgent>();
+        shootableLayer = LayerMask.GetMask("Shootable");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-         if(chaseTank != null)
-        {
-            tankInfo.tankTurret.LookAt(chaseTank.transform.position);
-            agent.destination = chaseTank.transform.position;
-
-            if (Vector3.Distance(chaseTank.transform.position, tank.transform.position) < tankInfo.metersToShoot)
-            {
-                animator.SetBool("Attack", true);
-            }
-        }
-        else
-        {
-            animator.SetBool("Attack", false);
-            animator.SetBool("Chase", false);
-        }
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
