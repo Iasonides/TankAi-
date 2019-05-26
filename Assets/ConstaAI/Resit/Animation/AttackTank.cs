@@ -25,6 +25,7 @@ public class AttackTank : StateMachineBehaviour
         anim = animator;
         agent = tank.GetComponent<NavMeshAgent>();
         shootableLayer = LayerMask.GetMask("Shootable");
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

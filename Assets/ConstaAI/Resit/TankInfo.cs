@@ -16,6 +16,7 @@ public class TankInfo : MonoBehaviour
     private bool isDead = false;
     Animator anim;
     public float metersToShoot;
+    public float tillFire = 1f;
 
 
     // Start is called before the first frame update
