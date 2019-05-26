@@ -22,7 +22,7 @@ public class Attack : StateMachineBehaviour
         tankAI = tank.GetComponent<TankAI>();
         chaseTheTank = tankAI.checkSomething;
         shootableMask = LayerMask.GetMask("Shootable");
-        timeOnFire = 5f;
+        timeOnFire = 1.5f;
         afterFire = 0f;
         tankAI.GetComponent<TankAI>().StartFiring();
     }
@@ -31,6 +31,7 @@ public class Attack : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         afterFire += Time.deltaTime;
+
 
         if (afterFire >= timeOnFire)
         {
@@ -53,8 +54,8 @@ public class Attack : StateMachineBehaviour
         {
             Debug.DrawRay(tankAI.turret.transform.position, tankAI.turret.transform.forward * hit.distance, Color.yellow);
             Debug.Log("Shot");
-            Rigidbody shellInstance = Instantiate(tankAI.shell, tankAI.turret.transform.position, tankAI.turret.transform.rotation) as Rigidbody;
-            tankAI.checkSomething.transform.LookAt(hit.transform);
+            tankAI.turret.transform.LookAt(hit.transform);
+            Rigidbody shellInstance = Instantiate(tankAI.shell, tankAI.turret.transform.position, tankAI.turret.transform.rotation) as Rigidbody;            
             tankAI.checkSomething = hit.transform.gameObject;
             shellInstance.velocity = tankAI.powerLaunch * tankAI.turret.transform.forward;
             afterFire = 0f;
