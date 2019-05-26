@@ -34,7 +34,7 @@ public class AttackTank : StateMachineBehaviour
 
         if(afterFire >= tillFire)
         {
-            Fire();
+            Fire(animator);
         }
     }
 
@@ -44,7 +44,7 @@ public class AttackTank : StateMachineBehaviour
         
     }
 
-    void Fire()
+    void Fire(Animator animator)
     {
         RaycastHit hit;
 
@@ -53,6 +53,21 @@ public class AttackTank : StateMachineBehaviour
         {
             Debug.DrawRay(tankInfo.fireTransform.transform.position, tankInfo.fireTransform.transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
             Debug.Log("fireeee");
+            
+            // Instantiate the projectile at the position and rotation of this transform
+            Rigidbody bullet;
+            bullet = Instantiate(tankInfo.bullet, tankInfo.fireTransform.position, tankInfo.fireTransform.rotation);
+            //tankInfo.tankTurret.LookAt(hit.transform);
+            //tankInfo.seeSomething = hit.transform.gameObject;
+            // Give the cloned object an initial velocity along the current
+            // object's Z axis
+            bullet.velocity = tankInfo.fireTransform.TransformDirection(Vector3.forward * 10);
+
+            afterFire = 0f;
+        }
+        else
+        {
+            animator.SetBool("Attack", false);
         }
     }
     // OnStateMove is called right after Animator.OnAnimatorMove()
