@@ -13,7 +13,7 @@ public class TankInfo : MonoBehaviour
     public float launchForce;
     public float fireBetweenTime = 1f;
     public GameObject seeSomething;
-    private NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
     public float currentHealth;
     private bool isDead = false;
     Animator anim;
@@ -38,7 +38,7 @@ public class TankInfo : MonoBehaviour
         if (other.gameObject.tag == "tank") 
         {
             seeSomething = other.gameObject;
-            anim.SetBool("chase", true);
+            //anim.SetBool("chase", true);
         }
     }
 }
