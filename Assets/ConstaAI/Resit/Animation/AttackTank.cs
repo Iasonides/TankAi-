@@ -57,11 +57,8 @@ public class AttackTank : StateMachineBehaviour
             // Instantiate the projectile at the position and rotation of this transform
             Rigidbody bullet;
             bullet = Instantiate(tankInfo.bullet, tankInfo.fireTransform.position, tankInfo.fireTransform.rotation);
-            //tankInfo.tankTurret.LookAt(hit.transform);
-            //tankInfo.seeSomething = hit.transform.gameObject;
-            // Give the cloned object an initial velocity along the current
-            // object's Z axis
             bullet.velocity = tankInfo.fireTransform.TransformDirection(Vector3.forward * 10);
+            
 
             afterFire = 0f;
         }
@@ -70,15 +67,4 @@ public class AttackTank : StateMachineBehaviour
             animator.SetBool("Attack", false);
         }
     }
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

@@ -10,8 +10,6 @@ public class TankInfo : MonoBehaviour
     public float totalHealth;
     public Rigidbody bullet;
     public Transform tankTurret;
-    public float powerOfBullet;
-    public float fireBetweenTime = 1f;
     public GameObject seeSomething;
     public NavMeshAgent agent;
     public float currentHealth;

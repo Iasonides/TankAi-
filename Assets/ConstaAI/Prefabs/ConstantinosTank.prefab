@@ -10752,12 +10752,10 @@ MonoBehaviour:
   totalHealth: 100
   bullet: {fileID: 8382186608112310507, guid: be2f4545a0791f14d868bb86b0156978, type: 3}
   tankTurret: {fileID: 1874344500}
-  powerOfBullet: 0
-  fireBetweenTime: 5
   seeSomething: {fileID: 0}
   agent: {fileID: 0}
   currentHealth: 0
-  metersToShoot: 5
+  metersToShoot: 10
 --- !u!1 &1824763063
 GameObject:
   m_ObjectHideFlags: 0
